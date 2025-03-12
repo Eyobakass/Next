@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { connectToDB } from "@utils/database"; // Ensure this is correct path
+import { connectToDB } from "@utils/database";
 import User from "@models/user";
 
 const handler = NextAuth({
@@ -22,7 +22,6 @@ const handler = NextAuth({
     },
     async signIn({ profile }) {
       try {
-        // Ensure DB connection before querying for user
         await connectToDB();
         const userExists = await User.findOne({ email: profile.email });
         if (!userExists) {
@@ -32,7 +31,7 @@ const handler = NextAuth({
             image: profile.picture,
           });
         }
-        return true; // Return true to proceed with Google sign-in
+        return true;
       } catch (error) {
         console.error("Error in signIn:", error);
         throw new Error("Failed to sign in");

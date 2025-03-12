@@ -1,3 +1,4 @@
+import Link from "@node_modules/next/link";
 import React from "react";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
@@ -41,11 +42,14 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             className="form_input"
           />
         </label>
+        <div className="flex-end mx-3 mb-5 gap-4">
+<Link href="/" className="text-gray-500">Cancel</Link>
+        </div>
         <div className="flex-end gap-4">
           <button
             type="submit"
             disabled={submitting}
-            className="black_btn"
+            className="outline_btn"
           >
             {submitting ? `${type}...` : type}
           </button>
